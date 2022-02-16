@@ -5,9 +5,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const DotEnv = require('dotenv-webpack');
 
-module.exports = env => ({
+module.exports = {
     entry: {
         main: path.resolve(__dirname, 'src', 'index.tsx')
     },
@@ -29,9 +28,6 @@ module.exports = env => ({
         }),
         new CopyWebpackPlugin({
             patterns: [{ from : 'src/static', to: 'static' }]
-        }),
-        new DotEnv({
-            path: `./.${env.NODE_ENV}.env`
         })
     ],
     stats: 'minimal',
@@ -47,4 +43,4 @@ module.exports = env => ({
             }
         ]
     }
-});
+};

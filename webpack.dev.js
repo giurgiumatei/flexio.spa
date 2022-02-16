@@ -12,9 +12,6 @@ module.exports = merge(common, {
         compress: true,
         hot: true,
         port: 8080,
-        overlay: true,
-        headers: {
-            'Access-Control-Allow-Origin' : '*'
-        }
+        overlay: true
     }
 });

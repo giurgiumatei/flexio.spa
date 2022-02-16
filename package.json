@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
-    "start": "webpack serve --env Node_ENV=dev --config webpack.dev.js",
-    "build": "webpack --env NODE_ENV=prod --config webpack.prod.js",
+    "start": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "tsc": "tsc"
   },
   "keywords": [],
