@@ -1,28 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import AuthService from './services/auth/authService';
 
-const getData = () => {
-    return new Promise((resolve) => {
-        setTimeout(resolve.bind('string data'), 5000);
-    });
-};
-
-const App = () => {
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        setLoading(true);
-        getData()
-            .then(() => {
-                setLoading(false);
-            });
-    }, []);
-
-    return (
-        <>
-            <h1>Flexio</h1>
-            {loading ? 'show spinner' : 'do not show'}
-        </>
-    );
-};
+const App = () => (
+    <button type='button' id='signIn' onClick={() => AuthService.signIn()}>
+        Sign In
+    </button>    
+);
 
 export default App;
