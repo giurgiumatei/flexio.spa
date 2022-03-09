@@ -46,8 +46,10 @@ class AuthService {
     };
 
     handleResponse = (response) => {
+        
         if (response != null) {
             this._username = response.account.username;
+            this.handleUserNew(response.account.idTokenClaims);
         } else {
             const currentAccounts = this._msal.getAllAccounts();
 
@@ -57,6 +59,16 @@ class AuthService {
 
             this._username = currentAccounts[0].username;
         }
+    };
+
+    handleUserNew = (idTokenClaims) => {
+        if (idTokenClaims.newUser) {
+            console.log('Da');
+        }
+        else{
+            console.log('Nu');
+        }
+        
     };
 }
 
