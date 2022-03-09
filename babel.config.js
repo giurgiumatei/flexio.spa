@@ -4,5 +4,5 @@ module.exports = {
         '@babel/preset-react',
         '@babel/preset-env'
     ],
-    plugins: ['@babel/plugin-proposal-class-properties', ['import', { 'libraryName': 'antd', 'style': true }]]
+    plugins: ['@babel/transform-runtime','@babel/plugin-proposal-class-properties', ['import', { 'libraryName': 'antd', 'style': true }]]
 };
