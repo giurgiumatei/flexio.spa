@@ -1,7 +1,7 @@
 import { Environment } from '../environment/environment';
 
 export const ApiEndpoints = {
-    users: {
+    user: {
         add: Environment.apiUrl + 'user'
     }
 };

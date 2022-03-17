@@ -1,4 +1,6 @@
+import { UserProps } from './../../interfaces/users/userProps';
 import { InteractionRequiredAuthError, PublicClientApplication } from '@azure/msal-browser';
+import userService from '../users/userService';
 import { msalConfig, msalRequest } from './authConfigs';
 
 
@@ -61,14 +63,19 @@ class AuthService {
         }
     };
 
-    handleUserNew = (idTokenClaims) => {
+    handleUserNew = async (idTokenClaims) => {
         if (idTokenClaims.newUser) {
-            console.log('Da');
+            const newUser : UserProps = {
+                city: idTokenClaims.city,
+                country: idTokenClaims.country,
+                email: idTokenClaims.emails[0],
+                firstName: idTokenClaims.family_name,
+                lastName: idTokenClaims.given_name,
+                displayName: idTokenClaims.name
+            };
+
+            await userService.addUser(newUser);
         }
-        else{
-            console.log('Nu');
-        }
-        
     };
 }
 
