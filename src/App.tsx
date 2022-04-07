@@ -8,7 +8,6 @@ const App = () => {
   };
 
   const handleApiCall = () => {
-      console.log('aici');
     ApiService.get<number>('/Version').then((response) => console.log(response));
   };
 

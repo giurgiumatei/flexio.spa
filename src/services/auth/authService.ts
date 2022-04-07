@@ -34,8 +34,8 @@ class AuthService {
 
         return this._msal
             .acquireTokenSilent(request)
-            .then((response) => {
-                if(!response.idToken || response.idToken === '') {
+            .then((response) => {                
+                if(!response.accessToken || response.accessToken === '') {
                     throw new InteractionRequiredAuthError();
                 }
                 return this.handleResponse(response);

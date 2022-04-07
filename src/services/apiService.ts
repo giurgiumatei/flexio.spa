@@ -20,7 +20,7 @@ class ApiService {
     private getAccessToken() {
         return AuthService
             .acquireUserToken(msalRequest)
-            .then(response => response ? response.idToken : null);
+            .then(response => response ? response.accessToken : null);
     }
 
 
