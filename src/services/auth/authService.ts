@@ -35,20 +35,19 @@ class AuthService {
         return this._msal
             .acquireTokenSilent(request)
             .then((response) => {
-                if(!response.accessToken || response.accessToken === '') {
+                if(!response.idToken || response.idToken === '') {
                     throw new InteractionRequiredAuthError();
                 }
-                return this.handleResponse(request);
+                return this.handleResponse(response);
             })
             .catch((error) => {
                 if (error instanceof InteractionRequiredAuthError) {
-                    return this._msal.acquireTokenRedirect(request);
+                    return this._msal.acquireTokenPopup(request);
                 }
             });
     };
 
     handleResponse = (response) => {
-        
         if (response != null) {
             this._username = response.account.username;
             this.handleUserNew(response.account.idTokenClaims);
@@ -61,6 +60,7 @@ class AuthService {
 
             this._username = currentAccounts[0].username;
         }
+        return response;
     };
 
     handleUserNew = async (idTokenClaims) => {
