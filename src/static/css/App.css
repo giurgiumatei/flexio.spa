@@ -12,3 +12,10 @@
     border-bottom: 1px solid lightgray;
     object-fit: contain;
   }
+
+  .Logo {
+      height: auto;
+      width: auto;
+      max-width: 7rem;
+      max-height: 7rem;
+  }
