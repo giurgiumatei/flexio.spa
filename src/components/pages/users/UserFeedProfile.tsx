@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar } from '@mui/material';
-import { UserFeedProfileProps } from '../interfaces/users/userFeedProfileProps';
+import { UserFeedProfileProps } from '../../../interfaces/users/userFeedProfileProps';
 import '../static/css';
 
 const UserFeedProfile = ({

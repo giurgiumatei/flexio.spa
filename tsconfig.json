@@ -11,5 +11,5 @@
     "lib": ["es2019", "dom"]
   },
   "exclude": ["./node_modules", "./public"],
-  "include": ["src"]
+  "include": ["src", "src/custom.d.ts"]
 }

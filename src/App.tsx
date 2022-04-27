@@ -1,7 +1,11 @@
+import { Box, Stack } from '@mui/material';
 import React from 'react';
+import Feed from './components/layout/Feed';
+import Navbar from './components/layout/Navbar';
+import Rightbar from './components/layout/Rightbar';
+import Sidebar from './components/layout/Sidebar';
 import ApiService from './services/apiService';
 import AuthService from './services/auth/authService';
-import './static/css/App.css';
 
 const App = () => {
   const handleLogin = () => {
@@ -15,15 +19,14 @@ const App = () => {
   };
 
   return (
-    <div className='App'>
-      <div className='app__header'>
-        <img
-          className='Logo'
-          src='https://www.logomaker.com/api/main/images/1j+ojFVDOMkX9Wytexe43D6khv6GqRdNnx7NwXs1M3EMoAJtliUtj...Fv9fk6'
-          alt='Flexio'
-        />
-      </div>
-    </div>
+    <Box>
+      <Navbar/>
+      <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
+        <Sidebar />
+        <Feed />
+        <Rightbar />
+      </Stack>
+    </Box>
   );
 };
 
