@@ -4,14 +4,17 @@ import {
   Avatar,
   Badge,
   Box,
+  Fab,
   InputBase,
   Menu,
   MenuItem,
   styled,
-  Toolbar
+  Toolbar,
+  Tooltip
 } from '@mui/material';
 import React, { useState } from 'react';
 import LogoImage from '../../static/assets/logo.svg';
+import AddUser from '../users/AddUser';
 
 const StyledAppbar = styled(AppBar)({
   backgroundColor: '#6667ab61'
@@ -20,6 +23,15 @@ const StyledAppbar = styled(AppBar)({
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
   justifyContent: 'space-between'
+});
+
+const AvatarFab = styled(Fab)({
+  color: 'black',
+  backgroundColor: 'inherit',
+  minWidth: '2.5rem',
+  minHeight: '2.5rem',
+  height: 'auto',
+  width: 'auto'
 });
 
 const Logo = styled('img')({
@@ -53,13 +65,15 @@ const Navbar = () => {
           <InputBase placeholder='search' />
         </Search>
         <Icons>
-          <Badge color='error'>
-            <Add color='action' />
-          </Badge>
-          <Avatar
-            sx={{ width: 30, height: 30 }}
-            onClick={() => setOpen(true)}
-          />
+          <AddUser />
+          <Tooltip title='My Profile'>
+            <AvatarFab color='inherit' aria-label='avatar'>
+              <Avatar
+                sx={{ width: 30, height: 30, bgcolor: 'inherit' }}
+                onClick={() => setOpen(true)}
+              />
+            </AvatarFab>
+          </Tooltip>
         </Icons>
       </StyledToolbar>
       <Menu
