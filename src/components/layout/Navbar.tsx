@@ -5,10 +5,12 @@ import {
   Badge,
   Box,
   InputBase,
+  Menu,
+  MenuItem,
   styled,
   Toolbar
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import LogoImage from '../../static/assets/logo.svg';
 
 const StyledToolbar = styled(Toolbar)({
@@ -34,10 +36,11 @@ const Search = styled('div')(({ theme }) => ({
 const Icons = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: '20px',
-  alignItems:'center'
+  alignItems: 'center'
 }));
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
   return (
     <AppBar position='sticky'>
       <StyledToolbar>
@@ -49,9 +52,30 @@ const Navbar = () => {
           <Badge color='error'>
             <Add color='action' />
           </Badge>
-          <Avatar sx={{ width: 30, height: 30 }} />
+          <Avatar
+            sx={{ width: 30, height: 30 }}
+            onClick={() => setOpen(true)}
+          />
         </Icons>
       </StyledToolbar>
+      <Menu
+        id='demo-positioned-menu'
+        aria-labelledby='demo-positioned-button'
+        open={open}
+        onClose={() => setOpen(false)}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+      >
+        <MenuItem>Profile</MenuItem>
+        <MenuItem>My account</MenuItem>
+        <MenuItem>Logout</MenuItem>
+      </Menu>
     </AppBar>
   );
 };
