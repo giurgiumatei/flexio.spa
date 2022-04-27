@@ -32,7 +32,7 @@ const Feed = () => {
         />
         <CardMedia
           component='img'
-          height='5%'
+          height='20%'
           image={TestImage}
           alt='Gabor'
         />

@@ -13,6 +13,10 @@ import {
 import React, { useState } from 'react';
 import LogoImage from '../../static/assets/logo.svg';
 
+const StyledAppbar = styled(AppBar)({
+  backgroundColor: '#6667ab61'
+});
+
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
   justifyContent: 'space-between'
@@ -42,7 +46,7 @@ const Icons = styled(Box)(({ theme }) => ({
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
-    <AppBar position='sticky'>
+    <StyledAppbar position='sticky'>
       <StyledToolbar>
         <Logo src={LogoImage} alt='Flexio' />
         <Search>
@@ -76,7 +80,7 @@ const Navbar = () => {
         <MenuItem>My account</MenuItem>
         <MenuItem>Logout</MenuItem>
       </Menu>
-    </AppBar>
+    </StyledAppbar>
   );
 };
 
