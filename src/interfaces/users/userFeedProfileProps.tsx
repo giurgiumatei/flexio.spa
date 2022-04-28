@@ -1,6 +1,9 @@
+import { CommentProps } from "../comments/commentProps"
+
 export interface UserFeedProfileProps {
-    id: number,
+    userId: number,
     displayName: string
     city: string,
     photo: string,
+    lastComment: CommentProps
 }

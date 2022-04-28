@@ -6,42 +6,35 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  IconButton,
   Typography
 } from '@mui/material';
 import { UserFeedProfileProps } from '../../interfaces/users/userFeedProfileProps';
-import { MoreVert, Favorite, Share } from '@mui/icons-material';
 import TestImage from '../../static/assets/images/Gabor.png';
 
-const UserFeedProfile = () => {
+const UserFeedProfile: React.FC<UserFeedProfileProps> = ({ displayName, city, photo, lastComment }) => {
   return (
     <Card sx={{ margin: 5 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: 'red' }} aria-label='recipe'>
-            G
+          <Avatar sx={{ bgcolor: '#6667ab61' }} aria-label='recipe'>
+            {displayName[0]}
           </Avatar>
         }
         action={
-          <IconButton aria-label='settings'>
-            <MoreVert />
-          </IconButton>
+          <h3>{city}</h3>
         }
-        title='Andrei Gabor'
+        title={displayName}
       />
-      <CardMedia component='img' height='20%' image={TestImage} alt='Gabor' />
+      <CardMedia component='img' height='20%' image={TestImage} alt={photo} />
       <CardContent>
         <Typography variant='body2' color='text.secondary'>
-          Suiera trenul in gara
+          <strong>
+            {lastComment.isAnonymous ? 'Anonymous: ' : lastComment.displayName + ': '}
+          </strong>
+          {lastComment.text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label='add to favorites'>
-          <Favorite />
-        </IconButton>
-        <IconButton aria-label='share'>
-          <Share />
-        </IconButton>
       </CardActions>
     </Card>
   );
