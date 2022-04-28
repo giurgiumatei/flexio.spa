@@ -1,5 +1,11 @@
-import { Box, Stack } from '@mui/material';
-import React from 'react';
+import {
+  Box,
+  createTheme,
+  PaletteMode,
+  Stack,
+  ThemeProvider
+} from '@mui/material';
+import React, { useState } from 'react';
 import Feed from './components/layout/Feed';
 import Navbar from './components/layout/Navbar';
 import Rightbar from './components/layout/Rightbar';
@@ -18,15 +24,25 @@ const App = () => {
     );
   };
 
+  const [mode, setMode] = useState('light');
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: mode as PaletteMode
+    }
+  });
+
   return (
-    <Box>
-      <Navbar/>
-      <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
-        <Sidebar />
-        <Feed />
-        <Rightbar />
-      </Stack>
-    </Box>
+    <ThemeProvider theme={darkTheme}>
+      <Box bgcolor={'background.default'} color={'text.primary'}>
+        <Navbar />
+        <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
+          <Sidebar setMode={setMode} mode={mode} />
+          <Feed />
+          <Rightbar />
+        </Stack>
+      </Box>
+    </ThemeProvider>
   );
 };
 
