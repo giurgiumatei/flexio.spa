@@ -12,6 +12,7 @@ import Rightbar from './components/layout/Rightbar';
 import Sidebar from './components/layout/Sidebar';
 import ApiService from './services/apiService';
 import AuthService from './services/auth/authService';
+import '../src/static/css/App.css';
 
 const App = () => {
   const handleLogin = () => {
