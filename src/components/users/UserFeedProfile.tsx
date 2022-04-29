@@ -25,7 +25,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({userId, displayName, c
         }
         title={displayName}
       />
-      <CardMedia component='img' height='20%' image={'https://flexio.blob.core.windows.net/1-andrei-gabor/Gabor.png'} alt={photo} />
+      <CardMedia component='img' height='20%' image={photo} alt={photo} />
       <CardContent>
         <Typography variant='body2' color='text.secondary'>
           <strong>
