@@ -58,7 +58,9 @@ const Navbar = () => {
   return (
     <StyledAppbar position='sticky'>
       <StyledToolbar>
-        <Logo src={LogoImage} alt='Flexio' />
+        <a href='home'>
+          <Logo src={LogoImage} alt='Flexio' />
+        </a>
         <Search>
           <InputBase placeholder='search' />
         </Search>
