@@ -6,7 +6,7 @@ import ApiService from '../apiService';
 
 class UserService {
     addUser = (data: UserProps) => ApiService.post<boolean, UserProps>(ApiEndpoints.user.add, data);
-    getUserFeedProfiles = (pageNumber: number, pageSize: number) => ApiService.get<UserFeedProfileProps[]>(ApiEndpoints.user.getUserFeedProfiles + PaginationQuery(1, 1))
+    getUserFeedProfiles = (pageNumber: number, pageSize: number) => ApiService.get<UserFeedProfileProps[]>(ApiEndpoints.user.getUserFeedProfiles + PaginationQuery(1, 10))
 }
 
 export default new UserService();

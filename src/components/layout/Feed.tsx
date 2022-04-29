@@ -23,6 +23,7 @@ const Feed = () => {
       <ul>
         {userFeedProfiles.map(userFeedProfile => (
           <UserFeedProfile key={userFeedProfile.userId}
+            userId = {userFeedProfile.userId}
             displayName={userFeedProfile.displayName}
             city={userFeedProfile.city}
             photo={userFeedProfile.photo}
