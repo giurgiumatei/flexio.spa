@@ -10,7 +10,8 @@ import {
   TextField,
   Stack,
   ButtonGroup,
-  Button
+  Button,
+  Input
 } from '@mui/material';
 import React, { useState } from 'react';
 
@@ -37,6 +38,7 @@ const UserBox = styled(Box)({
 
 const AddUser = () => {
   const [open, setOpen] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
 
   return (
     <>
@@ -63,6 +65,7 @@ const AddUser = () => {
             <TextField id='last-name' label='LastName' variant='outlined' />
             <TextField id='city' label='City' variant='outlined' />
             <TextField id='country' label='Country' variant='outlined' />
+            <Input type='file' onChange={ e => setProfileImage(e)}/>
             <ButtonGroup
               fullWidth
               variant='contained'
