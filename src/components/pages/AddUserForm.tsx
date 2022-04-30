@@ -1,4 +1,12 @@
-import { Grid, TextField } from '@mui/material';
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  TextField
+} from '@mui/material';
 import React from 'react';
 import { useForm, Form } from '../../customHooks/useForm';
 
@@ -54,6 +62,18 @@ const AddUserForm = () => {
           />
         </Grid>
         <Grid item xs={6}></Grid>
+        <FormControl>
+          <FormLabel>Gender</FormLabel>
+          <RadioGroup row
+          name='gender'
+          value={values.gender}
+          onChange={handleInputChange}
+        >
+            <FormControlLabel value='male' control={<Radio />} label='Male' />
+            <FormControlLabel value='female' control={<Radio />} label='Female' />
+            <FormControlLabel value='other' control={<Radio />} label='Other' />
+          </RadioGroup>
+        </FormControl>
       </Grid>
     </Form>
   );
