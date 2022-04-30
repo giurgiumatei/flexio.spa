@@ -3,12 +3,17 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
-  Radio,
-  RadioGroup,
-  TextField
+  Radio
 } from '@mui/material';
 import React from 'react';
 import { useForm, Form } from '../../customHooks/useForm';
+import Controls from '../controls/Controls';
+
+const genderItems = [
+  { id: 'male', title: 'Male' },
+  { id: 'female', title: 'Female' },
+  { id: 'other', title: 'Other' }
+];
 
 const initialValues = {
   id: 0,
@@ -26,54 +31,45 @@ const AddUserForm = () => {
     <Form>
       <Grid container>
         <Grid item xs={6}>
-          <TextField
-            variant='outlined'
-            label='First Name'
+          <Controls.Input
             name='firstName'
+            label='First Name'
             value={values.firstName}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
-            variant='outlined'
-            label='Last Name'
+          <Controls.Input
             name='lastName'
+            label='Last Name'
             value={values.lastName}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
-            variant='outlined'
-            label='City'
+          <Controls.Input
             name='city'
+            label='City'
             value={values.city}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
-            variant='outlined'
-            label='Country'
+          <Controls.Input
             name='country'
+            label='Country'
             value={values.country}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={6}></Grid>
-        <FormControl>
-          <FormLabel>Gender</FormLabel>
-          <RadioGroup row
+        <Controls.RadioGroup
           name='gender'
+          label='Gender'
           value={values.gender}
           onChange={handleInputChange}
-        >
-            <FormControlLabel value='male' control={<Radio />} label='Male' />
-            <FormControlLabel value='female' control={<Radio />} label='Female' />
-            <FormControlLabel value='other' control={<Radio />} label='Other' />
-          </RadioGroup>
-        </FormControl>
+          items = {genderItems}
+        />
       </Grid>
     </Form>
   );
