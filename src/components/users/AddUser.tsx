@@ -14,6 +14,7 @@ import {
   Input
 } from '@mui/material';
 import React, { useState } from 'react';
+import AddUserForm from '../pages/AddUserForm';
 
 const AddButtonFab = styled(Fab)({
   color: 'black',
@@ -53,29 +54,21 @@ const AddUser = () => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box width={500} height={400} bgcolor={'background.default'} color={'text.primary'} p={3} borderRadius={5}>
+        <Box
+          width={500}
+          height={400}
+          bgcolor={'background.default'}
+          color={'text.primary'}
+          p={3}
+          borderRadius={5}
+        >
           <Typography variant='h6' color='gray' textAlign='center'>
             Create Profile
           </Typography>
           <UserBox>
             <Avatar sx={{ width: 30, height: 30 }} />
           </UserBox>
-          <Stack direction='column' gap={1}>
-            <TextField id='first-name' label='FirstName' variant='outlined' />
-            <TextField id='last-name' label='LastName' variant='outlined' />
-            <TextField id='city' label='City' variant='outlined' />
-            <TextField id='country' label='Country' variant='outlined' />
-            <Input type='file' onChange={ e => setProfileImage(e)}/>
-            <ButtonGroup
-              fullWidth
-              variant='contained'
-              aria-label='outlined primary button group'
-            >
-              <Button>
-                <PersonAdd color='inherit' />
-              </Button>
-            </ButtonGroup>
-          </Stack>
+          <AddUserForm />
         </Box>
       </StyledModal>
     </>
