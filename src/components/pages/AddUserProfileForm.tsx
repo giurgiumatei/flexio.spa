@@ -21,7 +21,7 @@ const initialValues = {
   gender: 'male'
 };
 
-const AddUserForm = () => {
+const AddUserProfileForm = () => {
   const validate = (fieldValues = values) => {
     const temp = { ...errors };
     if ('firstName' in fieldValues) {
@@ -127,4 +127,4 @@ const AddUserForm = () => {
   );
 };
 
-export default AddUserForm;
+export default AddUserProfileForm;

@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import LogoImage from '../../static/assets/logo.svg';
-import AddUser from '../users/AddUser';
+import AddUserProfile from '../users/AddUserProfile';
 
 const StyledAppbar = styled(AppBar)({
   backgroundColor: '#6667ab61'
@@ -65,7 +65,7 @@ const Navbar = () => {
           <InputBase placeholder='search' />
         </Search>
         <Icons>
-          <AddUser />
+          <AddUserProfile />
           <Tooltip title='My Profile'>
             <AvatarFab color='inherit' aria-label='avatar'>
               <Avatar

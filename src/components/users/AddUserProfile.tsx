@@ -9,7 +9,7 @@ import {
   Avatar
 } from '@mui/material';
 import React, { useState } from 'react';
-import AddUserForm from '../pages/AddUserForm';
+import AddUserProfileForm from '../pages/AddUserProfileForm';
 
 const AddButtonFab = styled(Fab)({
   color: 'black',
@@ -32,7 +32,7 @@ const UserBox = styled(Box)({
   marginBottom: '20px'
 });
 
-const AddUser = () => {
+const AddUserProfile = () => {
   const [open, setOpen] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
   
@@ -63,11 +63,11 @@ const AddUser = () => {
           <UserBox>
             <Avatar sx={{ width: 30, height: 30 }} />
           </UserBox>
-          <AddUserForm/>
+          <AddUserProfileForm/>
         </Box>
       </StyledModal>
     </>
   );
 };
 
-export default AddUser;
+export default AddUserProfile;
