@@ -35,7 +35,7 @@ const UserBox = styled(Box)({
 const AddUser = () => {
   const [open, setOpen] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
-
+  
   return (
     <>
       <Tooltip title='Create a profile' onClick={() => setOpen(true)}>
@@ -63,7 +63,7 @@ const AddUser = () => {
           <UserBox>
             <Avatar sx={{ width: 30, height: 30 }} />
           </UserBox>
-          <AddUserForm />
+          <AddUserForm/>
         </Box>
       </StyledModal>
     </>

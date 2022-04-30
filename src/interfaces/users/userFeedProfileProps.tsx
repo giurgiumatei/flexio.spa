@@ -1,4 +1,4 @@
-import { CommentProps } from "../comments/commentProps"
+import { CommentProps } from '../comments/commentProps';
 
 export interface UserFeedProfileProps {
     userId: number,

@@ -10,8 +10,9 @@ const StyledForm = styled('form')(
   `
 );
 
-export const useForm = (initialValues) => {
+export const useForm = (initialValues, validateOnChange = false, validate) => {
   const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({} as any);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,15 +20,23 @@ export const useForm = (initialValues) => {
       ...values,
       [name]: value
     });
+
+    if (validateOnChange) {
+      validate({ [name]: value });
+    }
   };
 
   return {
     values,
     setValues,
+    errors,
+    setErrors,
     handleInputChange
   };
 };
 
 export const Form = (props) => {
-  return <StyledForm>{props.children}</StyledForm>;
+  const { children, ...other } = props;
+
+  return <StyledForm {...other}>{props.children}</StyledForm>;
 };
