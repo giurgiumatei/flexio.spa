@@ -1,4 +1,4 @@
-import { Add, PersonAdd } from '@mui/icons-material';
+import { Add } from '@mui/icons-material';
 import {
   Tooltip,
   Fab,
@@ -6,12 +6,7 @@ import {
   Box,
   Modal,
   Typography,
-  Avatar,
-  TextField,
-  Stack,
-  ButtonGroup,
-  Button,
-  Input
+  Avatar
 } from '@mui/material';
 import React, { useState } from 'react';
 import AddUserForm from '../pages/AddUserForm';

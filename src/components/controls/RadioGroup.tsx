@@ -1,6 +1,11 @@
-import { FormControl, FormLabel, FormControlLabel, Radio , RadioGroup as MuiRadioGroup} from '@mui/material';
+import {
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  Radio,
+  RadioGroup as MuiRadioGroup
+} from '@mui/material';
 import React from 'react';
-import { handleInputChange } from 'react-select/dist/declarations/src/utils';
 
 const RadioGroup = (props) => {
   const { name, label, value, onChange, items } = props;

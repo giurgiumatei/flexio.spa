@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  Radio
-} from '@mui/material';
+import { Grid } from '@mui/material';
 import React from 'react';
 import { useForm, Form } from '../../customHooks/useForm';
 import Controls from '../controls/Controls';
@@ -29,7 +23,7 @@ const AddUserForm = () => {
 
   return (
     <Form>
-      <Grid container>
+      <Grid container alignItems='center' justifyContent='center'>
         <Grid item xs={6}>
           <Controls.Input
             name='firstName'
@@ -62,14 +56,18 @@ const AddUserForm = () => {
             onChange={handleInputChange}
           />
         </Grid>
-        <Grid item xs={6}></Grid>
-        <Controls.RadioGroup
-          name='gender'
-          label='Gender'
-          value={values.gender}
-          onChange={handleInputChange}
-          items = {genderItems}
-        />
+        <Grid item xs={6}>
+          <Controls.RadioGroup
+            name='gender'
+            label='Gender'
+            value={values.gender}
+            onChange={handleInputChange}
+            items={genderItems}
+          />
+          <div>
+            <Controls.Button type='submit' text='Add Profile' />
+          </div>
+        </Grid>
       </Grid>
     </Form>
   );
