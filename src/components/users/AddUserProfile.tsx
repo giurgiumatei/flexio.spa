@@ -34,7 +34,6 @@ const UserBox = styled(Box)({
 
 const AddUserProfile = () => {
   const [open, setOpen] = useState(false);
-  const [profileImage, setProfileImage] = useState(null);
   
   return (
     <>

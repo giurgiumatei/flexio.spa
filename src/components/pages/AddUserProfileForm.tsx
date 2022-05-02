@@ -1,5 +1,5 @@
-import { Grid } from '@mui/material';
-import React, {  } from 'react';
+import { Grid, Input } from '@mui/material';
+import React, { useState } from 'react';
 import { useForm, Form } from '../../customHooks/useForm';
 import { AddUserProfileProps } from '../../interfaces/users/addUserProfileProps';
 import genderMap from '../../mappers/genderMap';
@@ -18,7 +18,8 @@ const initialValues = {
   lastName: '',
   city: '',
   country: '',
-  gender: 'male'
+  gender: 'male',
+  profileImage: null
 };
 
 const AddUserProfileForm = () => {
@@ -53,10 +54,22 @@ const AddUserProfileForm = () => {
     validate
   );
 
+  const [profileImage, setProfileImage] = useState(null);
+
+  const handleChangeImage = async (e) => {
+    const file = e.target.files[0];
+    await setProfileImage({
+      [e.target.id]: file
+    });
+
+    console.log(profileImage);
+    
+  };
+
   const submit = async (data: AddUserProfileProps) =>
     await userService.addUserProfile(data);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       const newProfile: AddUserProfileProps = {
@@ -64,9 +77,10 @@ const AddUserProfileForm = () => {
         lastName: values.lastName,
         city: values.city,
         country: values.country,
-        genderId: genderMap[values.gender]
+        genderId: genderMap[values.gender],
+        profileImage: profileImage
       };
-      submit(newProfile);
+      await submit(newProfile);
       window.location.reload();
     }
   };
@@ -117,6 +131,14 @@ const AddUserProfileForm = () => {
             value={values.gender}
             onChange={handleInputChange}
             items={genderItems}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <Input
+            name='profileImage'
+            type='file'
+            value={values.profileImage}
+            onChange={handleChangeImage}
           />
           <div>
             <Controls.Button type='submit' text='Add Profile' />

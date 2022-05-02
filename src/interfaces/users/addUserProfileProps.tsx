@@ -3,5 +3,6 @@ export interface AddUserProfileProps {
     lastName: string,
     city: string,
     country: string,
-    genderId: number
+    genderId: number,
+    profileImage: any
 }
