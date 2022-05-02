@@ -133,6 +133,7 @@ const AddUserProfileForm = () => {
             type='file'
             value={values.profileImage}
             onChange={handleChangeImage}
+            inputProps={{ accept: 'image/*' }}
           />
           <div>
             <Controls.Button type='submit' text='Add Profile' />

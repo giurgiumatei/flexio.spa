@@ -9,7 +9,7 @@ import {
   Avatar
 } from '@mui/material';
 import React, { useState } from 'react';
-import AddUserProfileForm from '../pages/AddUserProfileForm';
+import AddUserProfileForm from '../forms/AddUserProfileForm';
 
 const AddButtonFab = styled(Fab)({
   color: 'black',
