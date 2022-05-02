@@ -57,13 +57,7 @@ const AddUserProfileForm = () => {
   const [profileImage, setProfileImage] = useState(null);
 
   const handleChangeImage = async (e) => {
-    const file = e.target.files[0];
-    await setProfileImage({
-      [e.target.id]: file
-    });
-
-    console.log(profileImage);
-    
+    setProfileImage(e.target.files[0]);
   };
 
   const submit = async (data: AddUserProfileProps) =>
