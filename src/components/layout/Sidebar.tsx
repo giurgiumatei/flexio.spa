@@ -37,6 +37,7 @@ export const Sidebar = ({ mode, setMode }) => {
                 <ModeNight />
               </ListItemIcon>
               <Switch
+                color='default'
                 onChange={() => setMode(mode === 'light' ? 'dark' : 'light')}
               />
             </ListItemButton>
