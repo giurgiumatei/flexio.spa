@@ -1,4 +1,4 @@
-import { Grid, Input } from '@mui/material';
+import { Grid, Input, InputLabel } from '@mui/material';
 import React, { useState } from 'react';
 import { useForm, Form } from '../../customHooks/useForm';
 import { AddUserProfileProps } from '../../interfaces/users/addUserProfileProps';
@@ -128,13 +128,20 @@ const AddUserProfileForm = () => {
           />
         </Grid>
         <Grid item xs={6}>
-          <Input
-            name='profileImage'
-            type='file'
-            value={values.profileImage}
-            onChange={handleChangeImage}
-            inputProps={{ accept: 'image/*' }}
-          />
+          <InputLabel htmlFor='import-image'>
+            <Input
+              id='import-image'
+              name='profileImage'
+              type='file'
+              value={values.profileImage}
+              onChange={handleChangeImage}
+              inputProps={{ accept: 'image/*' }}
+              style={{ display: 'none' }}
+            />
+            Upload Profile Image
+          </InputLabel>
+        </Grid>
+        <Grid item xs={6}>
           <div>
             <Controls.Button type='submit' text='Add Profile' />
           </div>
