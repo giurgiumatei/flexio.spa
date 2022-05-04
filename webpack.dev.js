@@ -7,14 +7,18 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     devServer: {
         historyApiFallback: true,
-        contentBase: './build',
         open: true,
         compress: true,
         hot: true,
         port: 8080,
-        overlay: true,
+        client: {
+            overlay: {
+                errors: true,
+                warnings: false
+            }
+        },
         headers: {
-            'Access-Control-Allow-Origin' : '*'
+            'Access-Control-Allow-Origin': '*'
         }
     }
 });

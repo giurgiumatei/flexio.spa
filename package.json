@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
-    "start": "webpack serve --config webpack.dev.js",
+    "start": "webpack serve --env CONFIG=config --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "tsc": "tsc"
   },
@@ -35,9 +35,9 @@
     "less-loader": "^10.2.0",
     "style-loader": "^3.3.1",
     "typescript": "^4.1.3",
-    "webpack": "^5.16.0",
-    "webpack-cli": "^4.4.0",
-    "webpack-dev-server": "^3.11.2",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.0",
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
