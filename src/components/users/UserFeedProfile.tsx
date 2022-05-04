@@ -20,7 +20,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
 }) => {
   const navigate = useNavigate();
   const routeChange = () => {
-    const path = `/user/${1}`;
+    const path = `/user/${userId}`;
     navigate(path);
   };
 
