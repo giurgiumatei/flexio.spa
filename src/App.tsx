@@ -1,30 +1,14 @@
-import {
-  Box,
-  createTheme,
-  PaletteMode,
-  Stack,
-  ThemeProvider
-} from '@mui/material';
 import React, { useState } from 'react';
-import Feed from './components/layout/Feed';
+import '../src/static/css/App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './components/pages/Home';
+import { Box, createTheme, PaletteMode, Stack } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
 import Navbar from './components/layout/Navbar';
 import Rightbar from './components/layout/Rightbar';
 import Sidebar from './components/layout/Sidebar';
-import ApiService from './services/apiService';
-import AuthService from './services/auth/authService';
-import '../src/static/css/App.css';
 
 const App = () => {
-  const handleLogin = () => {
-    AuthService.signIn();
-  };
-
-  const handleApiCall = () => {
-    ApiService.get<number>('/Version').then((response) =>
-      console.log(response)
-    );
-  };
-
   const [mode, setMode] = useState('light');
 
   const darkTheme = createTheme({
@@ -39,7 +23,12 @@ const App = () => {
         <Navbar />
         <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
           <Sidebar setMode={setMode} mode={mode} />
-          <Feed />
+          <Router>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/home' element={<Home />} />
+            </Routes>
+          </Router>
           <Rightbar />
         </Stack>
       </Box>
