@@ -1,4 +1,4 @@
-import { createTheme, PaletteMode, Box, Stack } from '@mui/material';
+import { createTheme, PaletteMode, Box, Stack, ThemeProvider } from '@mui/material';
 import React, { useState } from 'react';
 import apiService from '../../services/apiService';
 import authService from '../../services/auth/authService';
@@ -18,7 +18,26 @@ const Home = () => {
       .then((response) => console.log(response));
   };
 
-  return <Feed />;
+  const [mode, setMode] = useState('light');
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: mode as PaletteMode
+    }
+  });
+
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <Box bgcolor={'background.default'} color={'text.primary'}>
+        <Navbar />
+        <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
+          <Sidebar setMode={setMode} mode={mode} />
+          <Feed />
+          <Rightbar />
+        </Stack>
+      </Box>
+    </ThemeProvider>
+  );
 };
 
 export default Home;
