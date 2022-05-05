@@ -5,7 +5,9 @@ import userService from '../../services/users/userService';
 import UserFeedProfile from '../users/UserFeedProfile';
 
 const Feed = () => {
-  const [userFeedProfiles, setUserFeedProfiles] = useState<UserFeedProfileProps[]>([]);
+  const [userFeedProfiles, setUserFeedProfiles] = useState<
+    UserFeedProfileProps[]
+  >([]);
 
   useEffect(() => {
     async function fetchUserFeedProfiles() {
@@ -18,21 +20,24 @@ const Feed = () => {
     fetchUserFeedProfiles();
   }, []);
 
-  return <Box flex={4} p={2}>
-    {userFeedProfiles.length > 0 && (
-      <ul>
-        {userFeedProfiles.map(userFeedProfile => (
-          <UserFeedProfile key={userFeedProfile.userId}
-            userId = {userFeedProfile.userId}
-            displayName={userFeedProfile.displayName}
-            city={userFeedProfile.city}
-            photo={userFeedProfile.photo}
-            lastComment={userFeedProfile.lastComment}
-          />
-        ))}
-      </ul>
-    )}
-  </Box>;
+  return (
+    <Box flex={4} p={2} style={{ marginLeft: '0px' }}>
+      {userFeedProfiles.length > 0 && (
+        <ul style={{ paddingLeft: '0px' }}>
+          {userFeedProfiles.map((userFeedProfile) => (
+            <UserFeedProfile
+              key={userFeedProfile.userId}
+              userId={userFeedProfile.userId}
+              displayName={userFeedProfile.displayName}
+              city={userFeedProfile.city}
+              photo={userFeedProfile.photo}
+              lastComment={userFeedProfile.lastComment}
+            />
+          ))}
+        </ul>
+      )}
+    </Box>
+  );
 };
 
 export default Feed;
