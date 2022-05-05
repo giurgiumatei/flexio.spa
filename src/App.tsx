@@ -3,7 +3,13 @@ import '../src/static/css/App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/pages/Home';
 import UserProfile from './components/pages/users/UserProfile';
-import { Box, createTheme, PaletteMode, Stack, ThemeProvider } from '@mui/material';
+import {
+  Box,
+  createTheme,
+  PaletteMode,
+  Stack,
+  ThemeProvider
+} from '@mui/material';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 
@@ -19,17 +25,17 @@ const App = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor={'background.default'} color={'text.primary'}>
-        <Navbar />
-        <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
-          <Sidebar setMode={setMode} mode={mode} />
-          <Router>
+        <Router>
+          <Navbar />
+          <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
+            <Sidebar setMode={setMode} mode={mode} />
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/home' element={<Home />} />
               <Route path='/user/:id' element={<UserProfile />} />
             </Routes>
-          </Router>
-        </Stack>
+          </Stack>
+        </Router>
       </Box>
     </ThemeProvider>
   );

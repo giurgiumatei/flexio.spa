@@ -11,6 +11,7 @@ import {
   Tooltip
 } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LogoImage from '../../static/assets/logo.svg';
 import AddUserProfile from '../users/AddUserProfile';
 
@@ -55,10 +56,16 @@ const Icons = styled(Box)(({ theme }) => ({
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const routeChange = () => {
+    const path = '/';
+    navigate(path);
+  };
+
   return (
     <StyledAppbar position='sticky'>
       <StyledToolbar>
-        <a href='home'>
+        <a onClick={routeChange}>
           <Logo src={LogoImage} alt='Flexio' />
         </a>
         <Search>
