@@ -5,7 +5,8 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  CardActions
+  CardActions,
+  Box
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -28,18 +29,30 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <Card sx={{ margin: 5 }}>
-      <CardMedia
-        component='img'
-        height='80%'
-        image={userProfile?.photo}
-        alt={userProfile?.photo}
-      />
-      <CardContent>
-        <Typography variant='body2' color='text.secondary'></Typography>
-      </CardContent>
-      <CardActions disableSpacing></CardActions>
-    </Card>
+    <Box
+      flex={4}
+      style={{ display: 'flex', alignItems: 'flex-start' }}
+      sx={{ width: '30vw' }}
+    >
+      <Card
+        sx={{
+          margin: 5,
+          width: { xs: '100%', sm: '35%' },
+          marginLeft: { sm: '20%' }
+        }}
+      >
+        <CardMedia
+          component='img'
+          height='20%'
+          image={userProfile?.photo}
+          alt={userProfile?.photo}
+        />
+        <CardContent>
+          <Typography variant='body2' color='text.secondary'></Typography>
+        </CardContent>
+        <CardActions disableSpacing></CardActions>
+      </Card>
+    </Box>
   );
 };
 

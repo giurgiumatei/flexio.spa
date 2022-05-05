@@ -65,7 +65,7 @@ const Navbar = () => {
   return (
     <StyledAppbar position='sticky'>
       <StyledToolbar>
-        <a onClick={routeChange}>
+        <a onClick={routeChange} style={{ cursor: 'pointer' }}>
           <Logo src={LogoImage} alt='Flexio' />
         </a>
         <Search>
