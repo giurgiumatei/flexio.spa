@@ -37,7 +37,7 @@ const UserProfile = () => {
       <Card
         sx={{
           margin: 5,
-          width: { xs: '100%', sm: '35%' },
+          width: { xs: '100%', sm: '40%' },
           marginLeft: { sm: '20%' }
         }}
       >
