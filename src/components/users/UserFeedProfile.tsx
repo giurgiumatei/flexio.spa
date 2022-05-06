@@ -25,7 +25,10 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
   };
 
   return (
-    <Card sx={{ margin: 5 }} onClick={routeChange}>
+    <Card
+      sx={{ margin: 5, marginTop: 'auto', marginInline: 'auto', width:'47%' }}
+      onClick={routeChange}
+    >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: '#6667ab61' }} aria-label='recipe'>
