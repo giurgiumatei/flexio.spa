@@ -38,7 +38,7 @@ const UserProfile = () => {
         sx={{
           margin: 5,
           width: { xs: '100%', sm: '40%' },
-          marginLeft: { sm: '20%' }
+          marginLeft: { sm: '16%' }
         }}
       >
         <CardMedia
