@@ -26,7 +26,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
 
   return (
     <Card
-      sx={{ margin: 5, marginTop: 'auto', marginInline: 'auto', width:'47%' }}
+      sx={{ margin: 5, marginTop: 'auto', marginInline: 'auto', width:{ xs: '100%', sm: '47%' } }}
       onClick={routeChange}
     >
       <CardHeader

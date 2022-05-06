@@ -31,13 +31,11 @@ const UserProfile = () => {
   return (
     <Box
       flex={4}
-      style={{ display: 'flex', alignItems: 'flex-start' }}
-      sx={{ width: '30vw' }}
     >
       <Card
         sx={{
           margin: 5,
-          width: { xs: '100%', sm: '40%' },
+          width: { xs: '85%', sm: '40%' },
           marginLeft: { sm: '16%' }
         }}
       >
