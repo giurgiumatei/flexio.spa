@@ -6,7 +6,8 @@ import {
   CardContent,
   Typography,
   CardActions,
-  Box
+  Box,
+  Stack
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -29,9 +30,7 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <Box
-      flex={4}
-    >
+    <Box flex={4}>
       <Card
         sx={{
           margin: 5,
@@ -46,7 +45,52 @@ const UserProfile = () => {
           alt={userProfile?.photo}
         />
         <CardContent>
-          <Typography variant='body2' color='text.secondary'></Typography>
+          <Stack direction={'row'} spacing={15} justifyContent={'center'}>
+            <Box>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color='text.secondary'
+                gutterBottom
+              >
+                Name:
+              </Typography>
+              <Typography variant='h5' component='div'>
+                {userProfile?.displayName}
+              </Typography>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color='text.secondary'
+                gutterBottom
+              >
+                City:
+              </Typography>
+              <Typography variant='h5' component='div'>
+                {userProfile?.city}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color='text.secondary'
+                gutterBottom
+              >
+                Country:
+              </Typography>
+              <Typography variant='h5' component='div'>
+                {userProfile?.country}
+              </Typography>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color='text.secondary'
+                gutterBottom
+              >
+                Gender:
+              </Typography>
+              <Typography variant='h5' component='div'>
+                {userProfile?.gender}
+              </Typography>
+            </Box>
+          </Stack>
         </CardContent>
         <CardActions disableSpacing></CardActions>
       </Card>
