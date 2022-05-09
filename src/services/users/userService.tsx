@@ -10,14 +10,14 @@ import ApiService from '../apiService';
 class UserService {
   addUser = (data: UserProps) =>
     ApiService.post<boolean, UserProps>(ApiEndpoints.user.addUser, data);
-  
+
   addUserProfile = (data: AddUserProfileProps) =>
     ApiService.post<boolean, FormData>(
       ApiEndpoints.user.addUserProfile,
       this.getNewUserProfileFormData(data),
       { headers: { 'Content-Type': 'multipart/form-data' } }
     );
-  
+
   getUserFeedProfiles = (pageNumber: number, pageSize: number) =>
     ApiService.get<UserFeedProfileProps[]>(
       ApiEndpoints.user.getUserFeedProfiles + PaginationQuery(1, 10)

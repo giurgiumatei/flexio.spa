@@ -92,7 +92,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
           }}
         >
           <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
-            <CommentBox isAnonymous={isAnonymous} />
+            <CommentBox userId={userId} isAnonymous={isAnonymous} />
             <FormControlLabel
               control={
                 <ThemedSwitch onChange={() => setIsAnonymous(!isAnonymous)} />

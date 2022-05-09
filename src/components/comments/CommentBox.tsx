@@ -2,10 +2,12 @@ import React, { useState, useRef } from 'react';
 import cn from 'classnames';
 import '../../static/css/CommentBox.css';
 import { Avatar } from '@mui/material';
+import { AddCommentProps } from '../../interfaces/comments/addCommentProps';
+import commentService from '../../services/users/commentService';
 
 const INITIAL_HEIGHT = 23;
 
-const CommentBox = ({ isAnonymous }) => {
+const CommentBox = ({ userId, isAnonymous }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [commentValue, setCommentValue] = useState('');
   const displayName = 'Matei Giurgiu';
@@ -31,9 +33,20 @@ const CommentBox = ({ isAnonymous }) => {
     setIsExpanded(false);
   };
 
-  const onSubmit = (e) => {
+  const submit = async (data: AddCommentProps) =>
+    await commentService.addComment(data);
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('send the form data somewhere ' + isAnonymous );
+    const newComment: AddCommentProps = {
+      email: 'giurgiu.matei@yahoo.com',
+      displayName: displayName,
+      text: commentValue,
+      addedToUserId: userId,
+      isAnonymous: isAnonymous
+    };
+    await submit(newComment);
+    onClose();
   };
 
   return (
