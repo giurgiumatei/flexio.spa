@@ -5,7 +5,7 @@ import { Avatar } from '@mui/material';
 
 const INITIAL_HEIGHT = 23;
 
-const CommentBox = () => {
+const CommentBox = ({ isAnonymous }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [commentValue, setCommentValue] = useState('');
   const displayName = 'Matei Giurgiu';
@@ -33,7 +33,7 @@ const CommentBox = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('send the form data somewhere');
+    console.log('send the form data somewhere ' + isAnonymous );
   };
 
   return (

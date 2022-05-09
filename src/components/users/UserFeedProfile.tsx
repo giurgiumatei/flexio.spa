@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   alpha,
   Avatar,
@@ -41,6 +41,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
     const path = `/user/${userId}`;
     navigate(path);
   };
+  const [isAnonymous, setIsAnonymous] = useState(false);
 
   return (
     <>
@@ -91,9 +92,11 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
           }}
         >
           <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
-            <CommentBox />
+            <CommentBox isAnonymous={isAnonymous} />
             <FormControlLabel
-              control={<ThemedSwitch />}
+              control={
+                <ThemedSwitch onChange={() => setIsAnonymous(!isAnonymous)} />
+              }
               label='Anonymous'
               style={{ marginBottom: '20px' }}
             />
