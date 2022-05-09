@@ -2,8 +2,6 @@ import { Avatar, Grid, Paper } from '@mui/material';
 import React from 'react';
 
 const Comment = ({ displayName, isAnonymous, text, dateAdded }) => {
-    console.log(dateAdded);
-    
   return (
     <Paper style={{ padding: '40px 20px', marginTop: 10 }}>
       <Grid container wrap='nowrap' spacing={2}>
