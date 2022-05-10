@@ -1,7 +1,7 @@
 export interface CommentProps {
-    commentId: number,
+    commentId: number | undefined | null,
     displayName: string,
     text: string,
-    dateAdded: Date,
+    dateAdded: Date | undefined | null,
     isAnonymous: boolean
 }

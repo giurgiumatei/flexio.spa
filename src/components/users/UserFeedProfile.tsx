@@ -42,6 +42,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
     navigate(path);
   };
   const [isAnonymous, setIsAnonymous] = useState(false);
+  const [latestComment, setLatestComment] = useState(lastComment);
 
   return (
     <>
@@ -75,13 +76,13 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
             }}
           >
             <strong>
-              {lastComment != null
-                ? lastComment.isAnonymous
+              {latestComment != null
+                ? latestComment.isAnonymous
                   ? 'Anonymous: '
-                  : lastComment.displayName + ': '
+                  : latestComment.displayName + ': '
                 : ''}
             </strong>
-            {lastComment != null ? lastComment.text : ''}
+            {latestComment != null ? latestComment.text : ''}
           </Typography>
           <Typography></Typography>
         </CardContent>
@@ -92,7 +93,11 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
           }}
         >
           <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
-            <CommentBox userId={userId} isAnonymous={isAnonymous} />
+            <CommentBox
+              userId={userId}
+              isAnonymous={isAnonymous}
+              setLatestComment={setLatestComment}
+            />
             <FormControlLabel
               control={
                 <ThemedSwitch onChange={() => setIsAnonymous(!isAnonymous)} />

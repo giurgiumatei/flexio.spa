@@ -4,10 +4,11 @@ import '../../static/css/CommentBox.css';
 import { Avatar } from '@mui/material';
 import { AddCommentProps } from '../../interfaces/comments/addCommentProps';
 import commentService from '../../services/users/commentService';
+import { CommentProps } from '../../interfaces/comments/commentProps';
 
 const INITIAL_HEIGHT = 23;
 
-const CommentBox = ({ userId, isAnonymous }) => {
+const CommentBox = ({ userId, isAnonymous, setLatestComment }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [commentValue, setCommentValue] = useState('');
   const displayName = 'Matei Giurgiu';
@@ -33,8 +34,17 @@ const CommentBox = ({ userId, isAnonymous }) => {
     setIsExpanded(false);
   };
 
-  const submit = async (data: AddCommentProps) =>
+  const submit = async (data: AddCommentProps) => {
     await commentService.addComment(data);
+    const lastComment: CommentProps = {
+      commentId: null,
+      displayName: displayName,
+      text: commentValue,
+      dateAdded: null,
+      isAnonymous: isAnonymous
+    };
+    setLatestComment(lastComment);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
