@@ -2,19 +2,22 @@ import { UserProps } from './../../interfaces/users/userProps';
 import { InteractionRequiredAuthError, PublicClientApplication } from '@azure/msal-browser';
 import userService from '../users/userService';
 import { msalConfig, msalRequest } from './authConfigs';
-
+import authStore from '../../store/auth';
 
 
 class AuthService {
     private _msal: PublicClientApplication;
-    private _username = '';
 
     constructor() {
         this._msal = new PublicClientApplication(msalConfig);
         this._msal
             .handleRedirectPromise()
-            .then(this.handleResponse);
-        
+            .then(this.handleResponse)
+            .then(() => {
+                if (authStore.getState().isLoggedIn) return;
+
+                this.signIn();
+            });
     }
 
     signIn = () => {
@@ -23,14 +26,16 @@ class AuthService {
 
     logOut = () => {
         const logOutRequest = {
-            account: this._msal.getAccountByHomeId(this._username)
+            account: this._msal.getAccountByUsername(authStore.getState().currentUser.username)
         };
 
-        this._msal.logout(logOutRequest);
+        this._msal
+        .logout(logOutRequest)
+        .then(() => authStore.logout());
     };
 
     acquireUserToken = (request) => {
-        request.account = this._msal.getAccountByUsername(this._username);
+        request.account = this._msal.getAccountByUsername(authStore.getState().currentUser.username);
 
         return this._msal
             .acquireTokenSilent(request)
@@ -49,7 +54,7 @@ class AuthService {
 
     handleResponse = (response) => {
         if (response != null) {
-            this._username = response.account.username;
+            authStore.login(response.account);
             this.handleUserNew(response.account.idTokenClaims);
         } else {
             const currentAccounts = this._msal.getAllAccounts();
@@ -58,7 +63,7 @@ class AuthService {
                 return;
             }
 
-            this._username = currentAccounts[0].username;
+            authStore.login(currentAccounts[0]);
         }
         return response;
     };
