@@ -12,8 +12,13 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuthInfo from '../../customHooks/useAuthInfo';
 import LogoImage from '../../static/assets/logo.svg';
+import authStore from '../../store/auth';
 import AddUserProfile from '../users/AddUserProfile';
+import AuthService from '../../services/auth/authService';
+import { Show } from '../Show';
+import LoginIcon from '@mui/icons-material/Login';
 
 const StyledAppbar = styled(AppBar)({
   backgroundColor: '#6667ab61'
@@ -26,6 +31,15 @@ const StyledToolbar = styled(Toolbar)({
 
 const AvatarFab = styled(Fab)({
   color: 'black',
+  backgroundColor: 'inherit',
+  minWidth: '2.5rem',
+  minHeight: '2.5rem',
+  height: 'auto',
+  width: 'auto'
+});
+
+const LoginFab = styled(Fab)({
+  color: 'white',
   backgroundColor: 'inherit',
   minWidth: '2.5rem',
   minHeight: '2.5rem',
@@ -61,6 +75,10 @@ const Navbar = () => {
     const path = '/';
     navigate(path);
   };
+  const isLoggedIn = useAuthInfo(
+    (authInfo) => authInfo.isLoggedIn,
+    authStore.getState().isLoggedIn
+  );
 
   return (
     <StyledAppbar position='sticky'>
@@ -72,15 +90,29 @@ const Navbar = () => {
           <InputBase placeholder='search' />
         </Search>
         <Icons>
-          <AddUserProfile />
-          <Tooltip title='My Profile'>
-            <AvatarFab color='inherit' aria-label='avatar'>
-              <Avatar
-                sx={{ width: 30, height: 30, bgcolor: 'inherit' }}
-                onClick={() => setOpen(true)}
-              />
-            </AvatarFab>
-          </Tooltip>
+          <Show
+            when={isLoggedIn}
+            fallback={
+              <Tooltip title='Sign In'>
+                <LoginFab color='inherit' aria-label='login'>
+                  <LoginIcon
+                    sx={{ width: 30, height: 30, bgcolor: 'inherit' }}
+                    onClick={() => AuthService.signIn()}
+                  />
+                </LoginFab>
+              </Tooltip>
+            }
+          >
+            <AddUserProfile />
+            <Tooltip title='My Profile'>
+              <AvatarFab color='inherit' aria-label='avatar'>
+                <Avatar
+                  sx={{ width: 30, height: 30, bgcolor: 'inherit' }}
+                  onClick={() => setOpen(true)}
+                />
+              </AvatarFab>
+            </Tooltip>
+          </Show>
         </Icons>
       </StyledToolbar>
       <Menu
@@ -99,7 +131,7 @@ const Navbar = () => {
       >
         <MenuItem>Profile</MenuItem>
         <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={() => AuthService.logOut()}>Logout</MenuItem>
       </Menu>
     </StyledAppbar>
   );

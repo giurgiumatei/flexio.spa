@@ -12,12 +12,7 @@ class AuthService {
         this._msal = new PublicClientApplication(msalConfig);
         this._msal
             .handleRedirectPromise()
-            .then(this.handleResponse)
-            .then(() => {
-                if (authStore.getState().isLoggedIn) return;
-
-                this.signIn();
-            });
+            .then(this.handleResponse);
     }
 
     signIn = () => {
