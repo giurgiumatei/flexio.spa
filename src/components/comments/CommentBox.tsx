@@ -5,13 +5,21 @@ import { Avatar } from '@mui/material';
 import { AddCommentProps } from '../../interfaces/comments/addCommentProps';
 import commentService from '../../services/users/commentService';
 import { CommentProps } from '../../interfaces/comments/commentProps';
+import useAuthInfo from '../../customHooks/useAuthInfo';
 
 const INITIAL_HEIGHT = 23;
 
 const CommentBox = ({ userId, isAnonymous, setLatestComment }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [commentValue, setCommentValue] = useState('');
-  const displayName = 'Matei Giurgiu';
+  const displayName = useAuthInfo(
+    (authInfo) => authInfo.currentUser.name,
+    false
+  );
+  const email = useAuthInfo(
+    (authInfo) => authInfo.currentUser.username,
+    false
+  );
   const formDefaultMessage = 'Add a comment';
 
   const outerHeight = useRef(INITIAL_HEIGHT);
@@ -49,7 +57,7 @@ const CommentBox = ({ userId, isAnonymous, setLatestComment }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const newComment: AddCommentProps = {
-      email: 'giurgiu.matei@yahoo.com',
+      email: email,
       displayName: displayName,
       text: commentValue,
       addedToUserId: userId,
