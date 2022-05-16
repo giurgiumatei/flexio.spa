@@ -28,6 +28,11 @@ class UserService {
       ApiEndpoints.user.getUserProfile + `?userId=${userId}`
     );
 
+  getUserIdByEmail = (email: string) =>
+    ApiService.get<number>(
+      ApiEndpoints.user.getUserIdByEmail + `?email=${email}`
+    );
+
   private getNewUserProfileFormData = (
     addUserProfileFormModel: AddUserProfileProps
   ): FormData =>

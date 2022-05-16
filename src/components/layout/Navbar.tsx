@@ -19,6 +19,7 @@ import AddUserProfile from '../users/AddUserProfile';
 import AuthService from '../../services/auth/authService';
 import { Show } from '../Show';
 import LoginIcon from '@mui/icons-material/Login';
+import userService from '../../services/users/userService';
 
 const StyledAppbar = styled(AppBar)({
   backgroundColor: '#6667ab61'
@@ -69,10 +70,17 @@ const Icons = styled(Box)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const email = useAuthInfo((authInfo) => authInfo.currentUser.username, false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const routeChange = () => {
     const path = '/';
+    navigate(path);
+  };
+  const goToCurrentUserProfile = async () => {
+    const path = `/user/${await userService
+      .getUserIdByEmail(email)
+      .then((response) => response.data)}`;
     navigate(path);
   };
   const isLoggedIn = useAuthInfo(
@@ -96,7 +104,12 @@ const Navbar = () => {
               <Tooltip title='Sign In'>
                 <LoginFab color='inherit' aria-label='login'>
                   <LoginIcon
-                    sx={{ width: 30, height: 30, bgcolor: 'inherit', borderRadius: '10px' }}
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      bgcolor: 'inherit',
+                      borderRadius: '10px'
+                    }}
                     onClick={() => AuthService.signIn()}
                   />
                 </LoginFab>
@@ -129,7 +142,9 @@ const Navbar = () => {
           horizontal: 'right'
         }}
       >
-        <MenuItem>Profile</MenuItem>
+        <MenuItem onClick={async () => goToCurrentUserProfile()}>
+          Profile
+        </MenuItem>
         <MenuItem>My account</MenuItem>
         <MenuItem onClick={() => AuthService.logOut()}>Logout</MenuItem>
       </Menu>
