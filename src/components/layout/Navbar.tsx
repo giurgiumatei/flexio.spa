@@ -96,7 +96,7 @@ const Navbar = () => {
               <Tooltip title='Sign In'>
                 <LoginFab color='inherit' aria-label='login'>
                   <LoginIcon
-                    sx={{ width: 30, height: 30, bgcolor: 'inherit' }}
+                    sx={{ width: 30, height: 30, bgcolor: 'inherit', borderRadius: '10px' }}
                     onClick={() => AuthService.signIn()}
                   />
                 </LoginFab>
