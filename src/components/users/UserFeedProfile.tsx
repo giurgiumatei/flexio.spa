@@ -16,6 +16,8 @@ import {
 import { UserFeedProfileProps } from '../../interfaces/users/userFeedProfileProps';
 import { useNavigate } from 'react-router-dom';
 import CommentBox from '../comments/CommentBox';
+import { Show } from '../Show';
+import useAuthInfo from '../../customHooks/useAuthInfo';
 
 const ThemedSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -43,6 +45,10 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
   };
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [latestComment, setLatestComment] = useState(lastComment);
+  const name = useAuthInfo(
+    (authInfo) => authInfo.currentUser.name,
+    false
+  );
 
   return (
     <>
@@ -93,6 +99,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
           }}
         >
           <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
+            <Show when={name != null} fallback={<></>}>
             <CommentBox
               userId={userId}
               isAnonymous={isAnonymous}
@@ -105,6 +112,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
               label='Anonymous'
               style={{ marginBottom: '20px' }}
             />
+            </Show>
           </Stack>
         </CardActions>
       </Card>
