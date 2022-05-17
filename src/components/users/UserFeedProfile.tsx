@@ -45,10 +45,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
   };
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [latestComment, setLatestComment] = useState(lastComment);
-  const name = useAuthInfo(
-    (authInfo) => authInfo.currentUser.name,
-    false
-  );
+  const name = useAuthInfo((authInfo) => authInfo.currentUser.name, false);
 
   return (
     <>
@@ -76,7 +73,7 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
             variant='body2'
             color='text.secondary'
             sx={{
-              borderBottom: 0.5,
+              borderBottom: name != null ? 0.5 : 0,
               paddingBottom: '10px',
               borderColor: '#bdbdbd'
             }}
@@ -90,31 +87,34 @@ const UserFeedProfile: React.FC<UserFeedProfileProps> = ({
             </strong>
             {latestComment != null ? latestComment.text : ''}
           </Typography>
-          <Typography></Typography>
         </CardContent>
-        <CardActions
-          disableSpacing
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
-            <Show when={name != null} fallback={<></>}>
-            <CommentBox
-              userId={userId}
-              isAnonymous={isAnonymous}
-              setLatestComment={setLatestComment}
-            />
-            <FormControlLabel
-              control={
-                <ThemedSwitch onChange={() => setIsAnonymous(!isAnonymous)} />
-              }
-              label='Anonymous'
-              style={{ marginBottom: '20px' }}
-            />
-            </Show>
-          </Stack>
-        </CardActions>
+        <Show when={name != null} fallback={<></>}>
+          <CardActions
+            disableSpacing
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <Stack
+              direction={'row'}
+              spacing={2}
+              justifyContent={'space-between'}
+            >
+              <CommentBox
+                userId={userId}
+                isAnonymous={isAnonymous}
+                setLatestComment={setLatestComment}
+              />
+              <FormControlLabel
+                control={
+                  <ThemedSwitch onChange={() => setIsAnonymous(!isAnonymous)} />
+                }
+                label='Anonymous'
+                style={{ marginBottom: '20px' }}
+              />
+            </Stack>
+          </CardActions>
+        </Show>
       </Card>
     </>
   );
