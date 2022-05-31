@@ -1,55 +1,46 @@
-import React, { useState } from 'react';
-import NiceInputPassword from 'react-nice-input-password';
-import { TextField, InputLabel, Typography } from '@mui/material';
-import LockIcon from '@mui/icons-material/Lock';
+import React, { useRef } from 'react';
+import useForm from 'react-hook-form';
 
-interface PasswordFieldProps {
-  value: string | undefined;
-}
+import './styles.css';
 
-const PasswordInput = () => {
-  const [passwordField, setPasswordField] = useState<PasswordFieldProps>();
-  const value = passwordField && passwordField.value;
-  const handleChange = (data) => {
-    setPasswordField({
-      value: data.value
-    });
-
-    console.log(passwordField.value);
+function PasswordInput() {
+  const { register, errors, handleSubmit, watch } = useForm();
+  const password = useRef({});
+  password.current = watch('password', '');
+  const onSubmit = async (data) => {
+    alert(JSON.stringify(data));
   };
 
   return (
-    <NiceInputPassword
-      label='Set Password'
-      name='passwordField'
-      value={value}
-      showSecurityLevelBar
-      showSecurityLevelDescription
-      onChange={handleChange}
-      LabelComponent={InputLabel}
-      InputComponent={TextField}
-      InputComponentProps={{
-        variant: 'outlined',
-        InputProps: {
-          endAdornment: <LockIcon />
-        }
-      }}
-      securityLevels={[
-        {
-          descriptionLabel: <Typography>1 number</Typography>,
-          validator: /.*[0-9].*/
-        },
-        {
-          descriptionLabel: <Typography>1 lowecase letter</Typography>,
-          validator: /.*[a-z].*/
-        },
-        {
-          descriptionLabel: <Typography>1 uppercase letter</Typography>,
-          validator: /.*[A-Z].*/
-        }
-      ]}
-    />
+    <form onSubmit={(e) => e.preventDefault()}>
+      <label>Password</label>
+      <input
+        name='password'
+        type='password'
+        ref={register({
+          required: 'You must specify a password',
+          minLength: {
+            value: 8,
+            message: 'Password must have at least 8 characters'
+          }
+        })}
+      />
+      {errors.password && <p>{errors.password.message}</p>}
+
+      <label>Repeat password</label>
+      <input
+        name='password_repeat'
+        type='password'
+        ref={register({
+          validate: (value) =>
+            value === password.current || 'The passwords do not match'
+        })}
+      />
+      {errors.password_repeat && <p>{errors.password_repeat.message}</p>}
+
+      <input type='submit' onClick={handleSubmit(onSubmit)} />
+    </form>
   );
-};
+}
 
 export default PasswordInput;
