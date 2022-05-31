@@ -7,5 +7,6 @@ export interface UserProfileProps {
     country: string,
     gender: string,
     photo: string,
+    canBeTakenOver: boolean,
     comments: CommentProps[]
 }

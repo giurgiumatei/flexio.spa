@@ -5,18 +5,39 @@ import {
   Typography,
   CardActions,
   Box,
-  Stack
+  Stack,
+  styled,
+  Fab,
+  Tooltip,
+  CardHeader
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useAuthInfo from '../../../customHooks/useAuthInfo';
 import { UserProfileProps } from '../../../interfaces/users/userProfileProps';
 import userService from '../../../services/users/userService';
 import '../../../static/css/UserProfile.css';
+import authStore from '../../../store/auth';
 import Comment from '../../comments/Comment';
+import { Show } from '../../Show';
+import FaceIcon from '@mui/icons-material/Face';
+
+const TakeOverFab = styled(Fab)({
+  color: 'white',
+  backgroundColor: '#6667ab61',
+  minWidth: '2.5rem',
+  minHeight: '2.5rem',
+  height: 'auto',
+  width: 'auto'
+});
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState<UserProfileProps>();
   const params = useParams();
+  const isLoggedIn = useAuthInfo(
+    (authInfo) => authInfo.isLoggedIn,
+    authStore.getState().isLoggedIn
+  );
 
   useEffect(() => {
     async function fetchUserProfile() {
@@ -38,6 +59,28 @@ const UserProfile = () => {
           marginLeft: { sm: '16%' }
         }}
       >
+        <Show when={!isLoggedIn && userProfile?.canBeTakenOver} fallback={<></>}>
+        <CardHeader
+          avatar={
+            <Tooltip title='Take Over'>
+              <TakeOverFab color='inherit' aria-label='login'>
+                <FaceIcon
+                  sx={{
+                    width: 'auto',
+                    height: 'auto',
+                    bgcolor: 'inherit',
+                    borderRadius: '10px'
+                  }}
+                  onClick={() => {
+                    return null;
+                  }}
+                />
+              </TakeOverFab>
+            </Tooltip>
+          }
+          title={'Take Over Profile'}
+          />
+          </Show>
         <CardMedia
           component='img'
           height='20%'
@@ -92,7 +135,8 @@ const UserProfile = () => {
             </Box>
           </Stack>
         </CardContent>
-        <CardActions disableSpacing></CardActions>
+        <CardActions disableSpacing>
+        </CardActions>
       </Card>
       <Stack
         direction={'column'}
