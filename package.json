@@ -45,6 +45,7 @@
     "@babel/runtime": "^7.17.2",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@hookform/resolvers": "^2.8.10",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.3",
     "axios": "^0.26.1",
@@ -59,6 +60,8 @@
     "react-nice-input-password": "^2.7.0",
     "react-router-dom": "^6.3.0",
     "react-select": "^5.3.1",
-    "rxjs": "^6.6.7"
+    "rxjs": "^6.6.7",
+    "yup": "^0.32.11",
+    "yup-password": "^0.2.2"
   }
 }
