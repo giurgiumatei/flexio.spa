@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
+import TakeOverUser from './components/pages/users/TakeOverUser';
 
 const App = () => {
   const [mode, setMode] = useState('light');
@@ -33,6 +34,7 @@ const App = () => {
               <Route path='/' element={<Home />} />
               <Route path='/home' element={<Home />} />
               <Route path='/user/:id' element={<UserProfile />} />
+              <Route path='/takeOverUser/:id' element={<TakeOverUser />} />
             </Routes>
           </Stack>
         </Router>
