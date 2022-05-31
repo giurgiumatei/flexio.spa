@@ -56,6 +56,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.30.0",
+    "react-nice-input-password": "^2.7.0",
     "react-router-dom": "^6.3.0",
     "react-select": "^5.3.1",
     "rxjs": "^6.6.7"
