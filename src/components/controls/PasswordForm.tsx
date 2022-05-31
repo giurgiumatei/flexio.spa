@@ -32,21 +32,21 @@ const PasswordForm = () => {
   return (
     <div className='Form'>
       <form onSubmit={handleSubmit(submitForm)}>
-        <Input
-          type='text'
+        <input
+          type='password'
           name='password'
           placeholder='Password'
           {...register('password', { required: true })}
         />
         <p>{errors.password?.message}</p>
-        <Input
-          type='text'
+        <input
+          type='password'
           name='confirmPassword'
           placeholder='Confirm Password'
           {...register('confirmPassword', { required: true })}
         />
         <p>{errors.confirmPassword && 'Passwords do not match'}</p>
-        <Input type='submit' id='submit' />
+        <input type='submit' id='submit' />
       </form>
     </div>
   );
