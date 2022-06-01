@@ -81,7 +81,6 @@ const TakeOverProfileForm = () => {
     await userService.takeOverUserProfile(data);
 
   const submitForm = async (data) => {
-    console.log(data);
     const userProfile: TakeOverUserProfileProps = {
       userId: +params.id,
       email: data.email,
