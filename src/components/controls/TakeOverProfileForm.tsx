@@ -4,6 +4,8 @@ import {
   InputLabel,
   OutlinedInput
 } from '@mui/material';
+import userService from '../../services/users/userService';
+import authService from '../../services/auth/authService';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import React from 'react';
@@ -13,6 +15,8 @@ import * as yup from 'yup';
 import YupPassword from 'yup-password';
 import MailIcon from '@mui/icons-material/Mail';
 import Controls from './Controls';
+import { TakeOverUserProfileProps } from '../../interfaces/users/takeOverUserProfileProps';
+import { useParams } from 'react-router-dom';
 YupPassword(yup);
 
 const schema = yup.object().shape({
@@ -30,6 +34,8 @@ interface State {
 }
 
 const TakeOverProfileForm = () => {
+  const params = useParams();
+
   const {
     register,
     handleSubmit,
@@ -45,7 +51,7 @@ const TakeOverProfileForm = () => {
     showPassword: false,
     showConfirmPassword: false
   });
-
+  
   const handleChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
@@ -57,6 +63,7 @@ const TakeOverProfileForm = () => {
       showPassword: !values.showPassword
     });
   };
+
   const handleClickShowConfirmPassword = () => {
     setValues({
       ...values,
@@ -70,8 +77,18 @@ const TakeOverProfileForm = () => {
     event.preventDefault();
   };
 
-  const submitForm = (data) => {
+  const submit = async (data: TakeOverUserProfileProps) =>
+    await userService.takeOverUserProfile(data);
+
+  const submitForm = async (data) => {
     console.log(data);
+    const userProfile: TakeOverUserProfileProps = {
+      userId: +params.id,
+      email: data.email,
+      password: data.password
+    };
+    await submit(userProfile);
+    authService.signIn();
   };
 
   return (

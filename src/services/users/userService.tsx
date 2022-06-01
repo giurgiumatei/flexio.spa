@@ -2,6 +2,7 @@ import { ApiEndpoints } from '../../api/endpoints';
 import { PaginationQuery } from '../../api/paginationQuery';
 import { FormDataBuilder } from '../../helpers/formDataBuilder';
 import { AddUserProfileProps } from '../../interfaces/users/addUserProfileProps';
+import { TakeOverUserProfileProps } from '../../interfaces/users/takeOverUserProfileProps';
 import { UserFeedProfileProps } from '../../interfaces/users/userFeedProfileProps';
 import { UserProfileProps } from '../../interfaces/users/userProfileProps';
 import { UserProps } from '../../interfaces/users/userProps';
@@ -17,6 +18,9 @@ class UserService {
       this.getNewUserProfileFormData(data),
       { headers: { 'Content-Type': 'multipart/form-data' } }
     );
+
+  takeOverUserProfile = (data: TakeOverUserProfileProps) =>
+    ApiService.post<boolean, TakeOverUserProfileProps>(ApiEndpoints.user.takeOverUserProfile, data);
 
   getUserFeedProfiles = (pageNumber: number, pageSize: number) =>
     ApiService.get<UserFeedProfileProps[]>(
