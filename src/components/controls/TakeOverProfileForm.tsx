@@ -11,21 +11,25 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import YupPassword from 'yup-password';
+import MailIcon from '@mui/icons-material/Mail';
+import Controls from './Controls';
 YupPassword(yup);
 
 const schema = yup.object().shape({
+  email: yup.string().email().required(),
   password: yup.string().password().minSymbols(0).required(),
   confirmPassword: yup.string().oneOf([yup.ref('password'), null])
 });
 
 interface State {
+  email: string;
   password: string;
   confirmPassword: string;
   showPassword: boolean;
   showConfirmPassword: boolean;
 }
 
-const PasswordForm = () => {
+const TakeOverProfileForm = () => {
   const {
     register,
     handleSubmit,
@@ -35,6 +39,7 @@ const PasswordForm = () => {
   });
 
   const [values, setValues] = React.useState<State>({
+    email: '',
     password: '',
     confirmPassword: '',
     showPassword: false,
@@ -72,7 +77,28 @@ const PasswordForm = () => {
   return (
     <div className='Form'>
       <form onSubmit={handleSubmit(submitForm)}>
-        <div>
+        <div style={{ paddingBottom: '10px' }}>
+          <InputLabel htmlFor='outlined-adornment-password'>Email</InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-password'
+            type='text'
+            value={values.email}
+            name='email'
+            placeholder='Email'
+            {...register('email', { required: true })}
+            onChange={handleChange('email')}
+            endAdornment={
+              <InputAdornment position='end'>
+                <IconButton aria-label='toggle password visibility' edge='end'>
+                  <MailIcon />
+                </IconButton>
+              </InputAdornment>
+            }
+            label='Email'
+          />
+          <p>{errors.email?.message}</p>
+        </div>
+        <div style={{ paddingBottom: '10px' }}>
           <InputLabel htmlFor='outlined-adornment-password'>
             Password
           </InputLabel>
@@ -100,7 +126,7 @@ const PasswordForm = () => {
           />
           <p>{errors.password?.message}</p>
         </div>
-        <div>
+        <div style={{ paddingBottom: '10px' }}>
           <InputLabel htmlFor='outlined-adornment-password'>
             Confirm Password
           </InputLabel>
@@ -132,10 +158,12 @@ const PasswordForm = () => {
           />
           <p>{errors.confirmPassword && 'Passwords do not match'}</p>
         </div>
-        <input type='submit' id='submit' />
+        <div style={{ marginLeft: '20px' }}>
+          <Controls.Button type='submit' text='Take Over Account' />
+        </div>
       </form>
     </div>
   );
 };
 
-export default PasswordForm;
+export default TakeOverProfileForm;

@@ -1,11 +1,19 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
-import PasswordForm from '../../controls/PasswordForm';
+import TakeOverProfileForm from '../../controls/TakeOverProfileForm';
 
 const TakeOverUser = () => {
   return (
-    <Box flex={4} p={2} style={{ marginLeft: '0px' }}>
-      <PasswordForm />
+    <Box
+      flex={4}
+      p={2}
+      sx={{
+        minHeight: '100vh',
+        marginLeft: { xs: '20%', sm: '27%' },
+        marginTop: { xs: '20%', sm: '5%' }
+      }}
+    >
+      <TakeOverProfileForm />
     </Box>
   );
 };
