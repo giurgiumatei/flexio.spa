@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import TakeOverProfileForm from '../../controls/TakeOverProfileForm';
 
-const TakeOverUser = () => {
+const TakeOverProfile = () => {
   return (
     <Box
       flex={4}
@@ -18,4 +18,4 @@ const TakeOverUser = () => {
   );
 };
 
-export default TakeOverUser;
+export default TakeOverProfile;

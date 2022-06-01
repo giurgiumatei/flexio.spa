@@ -40,7 +40,7 @@ const UserProfile = () => {
   );
   const navigate = useNavigate();
   const routeChange = () => {
-    const path = `/takeOverUser/${params.id}`;
+    const path = `/takeOverProfile/${params.id}`;
     navigate(path);
   };
 
