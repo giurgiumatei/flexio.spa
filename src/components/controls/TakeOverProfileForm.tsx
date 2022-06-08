@@ -16,7 +16,7 @@ import YupPassword from 'yup-password';
 import MailIcon from '@mui/icons-material/Mail';
 import Controls from './Controls';
 import { TakeOverUserProfileProps } from '../../interfaces/users/takeOverUserProfileProps';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 YupPassword(yup);
 
 const schema = yup.object().shape({
@@ -35,6 +35,13 @@ interface State {
 
 const TakeOverProfileForm = () => {
   const params = useParams();
+
+  const navigate = useNavigate();
+
+  const routeChange = () => {
+    const path = '/';
+    navigate(path);
+  };
 
   const {
     register,
@@ -88,6 +95,7 @@ const TakeOverProfileForm = () => {
     };
     await submit(userProfile);
     authService.signIn();
+    routeChange();
   };
 
   return (
