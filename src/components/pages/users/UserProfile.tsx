@@ -21,6 +21,7 @@ import authStore from '../../../store/auth';
 import Comment from '../../comments/Comment';
 import { Show } from '../../Show';
 import FaceIcon from '@mui/icons-material/Face';
+import { CommentProps } from '../../../interfaces/comments/commentProps';
 
 const TakeOverFab = styled(Fab)({
   color: 'white',
@@ -33,6 +34,7 @@ const TakeOverFab = styled(Fab)({
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState<UserProfileProps>();
+  const [comments, setComments] = useState<CommentProps[]>([]);
   const params = useParams();
   const isLoggedIn = useAuthInfo(
     (authInfo) => authInfo.isLoggedIn,
@@ -43,6 +45,15 @@ const UserProfile = () => {
     const path = `/takeOverProfile/${params.id}`;
     navigate(path);
   };
+  const handleCommentDeletion = (commentId: number) => {
+    const index = comments.findIndex(
+      (comment) => comment.commentId === commentId
+    ); 
+
+    if (index > -1) {
+      setComments((items) => items.filter((_, i) => i !== index));
+    }
+  };
 
   useEffect(() => {
     async function fetchUserProfile() {
@@ -50,6 +61,7 @@ const UserProfile = () => {
         .getUserProfile(params.id)
         .then((response) => response.data);
       setUserProfile(userProfile);
+      setComments(userProfile?.comments);
     }
 
     fetchUserProfile();
@@ -149,8 +161,8 @@ const UserProfile = () => {
         justifyContent={'center'}
         sx={{ width: { sm: '70%' } }}
       >
-        {userProfile?.comments.length > 0 &&
-          userProfile?.comments.map((comment) => (
+        {comments.length > 0 &&
+          comments.map((comment) => (
             <Comment
               key={comment.commentId}
               commentId={comment.commentId}
@@ -158,6 +170,7 @@ const UserProfile = () => {
               isAnonymous={comment.isAnonymous}
               text={comment.text}
               dateAdded={comment.dateAdded}
+              handleCommentDeletion={handleCommentDeletion}
             />
           ))}
       </Stack>
