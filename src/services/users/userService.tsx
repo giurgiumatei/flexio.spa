@@ -24,7 +24,7 @@ class UserService {
 
   getUserFeedProfiles = (pageNumber: number, pageSize: number) =>
     ApiService.get<UserFeedProfileProps[]>(
-      ApiEndpoints.user.getUserFeedProfiles + PaginationQuery(1, 10)
+      ApiEndpoints.user.getUserFeedProfiles + PaginationQuery(pageNumber, pageSize)
     );
 
   getUserProfile = (userId: string) =>
