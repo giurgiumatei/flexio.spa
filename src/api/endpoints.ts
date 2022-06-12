@@ -10,6 +10,7 @@ export const ApiEndpoints = {
         takeOverUserProfile: Environment.apiUrl + 'user/takeOverUserProfile'
     },
     comment: {
-        addComment: Environment.apiUrl + 'comment'
+        addComment: Environment.apiUrl + 'comment',
+        deleteComment: Environment.apiUrl + 'comment'
     }
 };

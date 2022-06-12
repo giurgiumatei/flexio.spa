@@ -1,8 +1,9 @@
 import { Avatar, Grid, Paper } from '@mui/material';
 import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CommentService from '../../services/users/commentService';
 
-const Comment = ({ displayName, isAnonymous, text, dateAdded }) => {
+const Comment = ({ commentId, displayName, isAnonymous, text, dateAdded }) => {
   return (
     <Paper style={{ padding: '40px 20px', marginTop: 10 }}>
       <Grid container wrap='nowrap' spacing={2}>
@@ -20,7 +21,7 @@ const Comment = ({ displayName, isAnonymous, text, dateAdded }) => {
             {dateAdded.substring(0, 10)}
           </p>
         </Grid>
-        <Grid item onClick={() => console.log('da')}>
+        <Grid item onClick={() => CommentService.deleteComment(commentId)}>
           <DeleteIcon fontSize='large' />
         </Grid>
       </Grid>

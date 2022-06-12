@@ -8,6 +8,10 @@ class CommentService {
       ApiEndpoints.comment.addComment,
       data
     );
+  deleteComment = (commentId: number) =>
+    ApiService.delete<boolean, number>(
+      ApiEndpoints.comment.deleteComment + `?commentId=${commentId}`
+    );
 }
 
 export default new CommentService();

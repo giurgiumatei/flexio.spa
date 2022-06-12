@@ -153,6 +153,7 @@ const UserProfile = () => {
           userProfile?.comments.map((comment) => (
             <Comment
               key={comment.commentId}
+              commentId={comment.commentId}
               displayName={comment.displayName}
               isAnonymous={comment.isAnonymous}
               text={comment.text}
