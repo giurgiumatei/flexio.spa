@@ -9,7 +9,10 @@ import {
   styled,
   Fab,
   Tooltip,
-  CardHeader
+  CardHeader,
+  FormControlLabel,
+  Switch,
+  alpha
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -22,6 +25,7 @@ import Comment from '../../comments/Comment';
 import { Show } from '../../Show';
 import FaceIcon from '@mui/icons-material/Face';
 import { CommentProps } from '../../../interfaces/comments/commentProps';
+import CommentBox from '../../comments/CommentBox';
 
 const TakeOverFab = styled(Fab)({
   color: 'white',
@@ -32,22 +36,38 @@ const TakeOverFab = styled(Fab)({
   width: 'auto'
 });
 
+const ThemedSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: '#6667AB61',
+    '&:hover': {
+      backgroundColor: alpha('#6667AB61', theme.palette.action.hoverOpacity)
+    }
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: '#6667AB61'
+  }
+}));
+
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState<UserProfileProps>();
   const [comments, setComments] = useState<CommentProps[]>([]);
+  const [isAnonymous, setIsAnonymous] = useState(false);
   const params = useParams();
   const isLoggedIn = useAuthInfo(
     (authInfo) => authInfo.isLoggedIn,
     authStore.getState().isLoggedIn
   );
-  const currentUserEmail = useAuthInfo(
-    (authInfo) => authInfo.currentUser.username,
-    authStore.getState().currentUser.username
-  );
   const navigate = useNavigate();
   const routeChange = () => {
     const path = `/takeOverProfile/${params.id}`;
     navigate(path);
+  };
+  const handleCommentAddition = async () => {
+    const userProfile = await userService
+      .getUserProfile(params.id, authStore.getState().currentUser.username)
+      .then((response) => response.data);
+    setUserProfile(userProfile);
+    setComments([...userProfile?.comments]);
   };
   const handleCommentDeletion = (commentId: number) => {
     const index = comments.findIndex(
@@ -61,10 +81,6 @@ const UserProfile = () => {
 
   useEffect(() => {
     async function fetchUserProfile() {
-      console.log(currentUserEmail);
-      console.log(isLoggedIn);
-      
-      
       const userProfile = await userService
         .getUserProfile(params.id, authStore.getState().currentUser.username)
         .then((response) => response.data);
@@ -163,6 +179,33 @@ const UserProfile = () => {
         </CardContent>
         <CardActions disableSpacing></CardActions>
       </Card>
+      <Show when={isLoggedIn} fallback={<></>}>
+        <CardActions
+          disableSpacing
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          sx={{
+            marginLeft: { sm: '16%', xs: '34px' }
+          }}
+        >
+          <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
+            <CommentBox
+              userId={params.id}
+              isAnonymous={isAnonymous}
+              setLatestComment={handleCommentAddition}
+            />
+            <FormControlLabel
+              control={
+                <ThemedSwitch onChange={() => setIsAnonymous(!isAnonymous)} />
+              }
+              label='Anonymous'
+              labelPlacement='top'
+              style={{ marginBottom: '20px' }}
+            />
+          </Stack>
+        </CardActions>
+      </Show>
       <Stack
         direction={'column'}
         spacing={15}

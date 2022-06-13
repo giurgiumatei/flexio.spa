@@ -95,7 +95,7 @@ const TakeOverProfileForm = () => {
     };
     await submit(userProfile);
     authService.signIn();
-    routeChange();
+    setTimeout(() => {routeChange();}, 1);
   };
 
   return (

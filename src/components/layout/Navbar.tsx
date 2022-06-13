@@ -87,6 +87,10 @@ const Navbar = () => {
     (authInfo) => authInfo.isLoggedIn,
     authStore.getState().isLoggedIn
   );
+  const handleSignIn = () => {
+    AuthService.signIn();
+    setTimeout(() => {routeChange();}, 1);
+  };
 
   return (
     <StyledAppbar position='sticky'>
@@ -110,7 +114,7 @@ const Navbar = () => {
                       bgcolor: 'inherit',
                       borderRadius: '10px'
                     }}
-                    onClick={() => AuthService.signIn()}
+                    onClick={handleSignIn}
                   />
                 </LoginFab>
               </Tooltip>

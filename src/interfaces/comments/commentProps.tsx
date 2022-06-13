@@ -4,5 +4,5 @@ export interface CommentProps {
     text: string,
     dateAdded: Date | undefined | null,
     isAnonymous: boolean,
-    canBeDeleted: boolean
+    canBeDeleted?: boolean
 }
