@@ -40,6 +40,10 @@ const UserProfile = () => {
     (authInfo) => authInfo.isLoggedIn,
     authStore.getState().isLoggedIn
   );
+  const currentUserEmail = useAuthInfo(
+    (authInfo) => authInfo.currentUser.username,
+    authStore.getState().currentUser.username
+  );
   const navigate = useNavigate();
   const routeChange = () => {
     const path = `/takeOverProfile/${params.id}`;
@@ -48,7 +52,7 @@ const UserProfile = () => {
   const handleCommentDeletion = (commentId: number) => {
     const index = comments.findIndex(
       (comment) => comment.commentId === commentId
-    ); 
+    );
 
     if (index > -1) {
       setComments((items) => items.filter((_, i) => i !== index));
@@ -57,8 +61,12 @@ const UserProfile = () => {
 
   useEffect(() => {
     async function fetchUserProfile() {
+      console.log(currentUserEmail);
+      console.log(isLoggedIn);
+      
+      
       const userProfile = await userService
-        .getUserProfile(params.id)
+        .getUserProfile(params.id, authStore.getState().currentUser.username)
         .then((response) => response.data);
       setUserProfile(userProfile);
       setComments(userProfile?.comments);
@@ -170,6 +178,7 @@ const UserProfile = () => {
               isAnonymous={comment.isAnonymous}
               text={comment.text}
               dateAdded={comment.dateAdded}
+              canBeDeleted={comment.canBeDeleted}
               handleCommentDeletion={handleCommentDeletion}
             />
           ))}

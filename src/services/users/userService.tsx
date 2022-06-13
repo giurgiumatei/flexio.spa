@@ -27,9 +27,9 @@ class UserService {
       ApiEndpoints.user.getUserFeedProfiles + PaginationQuery(pageNumber, pageSize)
     );
 
-  getUserProfile = (userId: string) =>
+  getUserProfile = (userId: string, currentUserEmail: string) =>
     ApiService.get<UserProfileProps>(
-      ApiEndpoints.user.getUserProfile + `?userId=${userId}`
+      ApiEndpoints.user.getUserProfile + `?userId=${userId}&currentUserEmail=${currentUserEmail}`
     );
 
   getUserIdByEmail = (email: string) =>

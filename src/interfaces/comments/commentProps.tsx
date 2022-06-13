@@ -3,5 +3,6 @@ export interface CommentProps {
     displayName: string,
     text: string,
     dateAdded: Date | undefined | null,
-    isAnonymous: boolean
+    isAnonymous: boolean,
+    canBeDeleted: boolean
 }
