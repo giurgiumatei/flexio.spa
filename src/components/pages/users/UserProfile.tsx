@@ -62,12 +62,15 @@ const UserProfile = () => {
     const path = `/takeOverProfile/${params.id}`;
     navigate(path);
   };
-  const handleCommentAddition = async () => {
+  const setData = async () => {
     const userProfile = await userService
       .getUserProfile(params.id, authStore.getState().currentUser.username)
       .then((response) => response.data);
     setUserProfile(userProfile);
-    setComments([...userProfile?.comments]);
+    setComments(userProfile?.comments);
+  };
+  const handleCommentAddition = async () => {
+    setData();
   };
   const handleCommentDeletion = (commentId: number) => {
     const index = comments.findIndex(
@@ -81,11 +84,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     async function fetchUserProfile() {
-      const userProfile = await userService
-        .getUserProfile(params.id, authStore.getState().currentUser.username)
-        .then((response) => response.data);
-      setUserProfile(userProfile);
-      setComments(userProfile?.comments);
+      setData();
     }
 
     fetchUserProfile();
