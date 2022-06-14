@@ -20,6 +20,7 @@ import AuthService from '../../services/auth/authService';
 import { Show } from '../Show';
 import LoginIcon from '@mui/icons-material/Login';
 import userService from '../../services/users/userService';
+import SearchBar from '../controls/SearchBar';
 
 const StyledAppbar = styled(AppBar)({
   backgroundColor: '#6667ab61'
@@ -98,9 +99,7 @@ const Navbar = () => {
         <a onClick={routeChange} style={{ cursor: 'pointer' }}>
           <Logo src={LogoImage} alt='Flexio' />
         </a>
-        <Search>
-          <InputBase placeholder='search' />
-        </Search>
+        <SearchBar/>
         <Icons>
           <Show
             when={isLoggedIn}

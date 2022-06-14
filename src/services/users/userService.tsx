@@ -6,6 +6,7 @@ import { TakeOverUserProfileProps } from '../../interfaces/users/takeOverUserPro
 import { UserFeedProfileProps } from '../../interfaces/users/userFeedProfileProps';
 import { UserProfileProps } from '../../interfaces/users/userProfileProps';
 import { UserProps } from '../../interfaces/users/userProps';
+import { UserSearchSuggestionProps } from '../../interfaces/users/userSearchSuggestionProps';
 import ApiService from '../apiService';
 
 class UserService {
@@ -20,21 +21,31 @@ class UserService {
     );
 
   takeOverUserProfile = (data: TakeOverUserProfileProps) =>
-    ApiService.post<boolean, TakeOverUserProfileProps>(ApiEndpoints.user.takeOverUserProfile, data);
+    ApiService.post<boolean, TakeOverUserProfileProps>(
+      ApiEndpoints.user.takeOverUserProfile,
+      data
+    );
 
   getUserFeedProfiles = (pageNumber: number, pageSize: number) =>
     ApiService.get<UserFeedProfileProps[]>(
-      ApiEndpoints.user.getUserFeedProfiles + PaginationQuery(pageNumber, pageSize)
+      ApiEndpoints.user.getUserFeedProfiles +
+        PaginationQuery(pageNumber, pageSize)
     );
 
   getUserProfile = (userId: string, currentUserEmail: string) =>
     ApiService.get<UserProfileProps>(
-      ApiEndpoints.user.getUserProfile + `?userId=${userId}&currentUserEmail=${currentUserEmail}`
+      ApiEndpoints.user.getUserProfile +
+        `?userId=${userId}&currentUserEmail=${currentUserEmail}`
     );
 
   getUserIdByEmail = (email: string) =>
     ApiService.get<number>(
       ApiEndpoints.user.getUserIdByEmail + `?email=${email}`
+    );
+
+  searchUserProfile = (name: string) =>
+    ApiService.get<UserSearchSuggestionProps[]>(
+      ApiEndpoints.user.searchUserProfile + `?name=${name}`
     );
 
   private getNewUserProfileFormData = (

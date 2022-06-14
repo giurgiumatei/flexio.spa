@@ -60,6 +60,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-nice-input-password": "^2.7.0",
     "react-router-dom": "^6.3.0",
+    "react-search-box": "^2.2.1",
     "react-select": "^5.3.1",
     "rxjs": "^6.6.7",
     "yup": "^0.32.11",

@@ -7,7 +7,8 @@ export const ApiEndpoints = {
         getUserFeedProfiles: Environment.apiUrl + 'user/get-user-feed-profiles',
         getUserProfile: Environment.apiUrl + 'user/userProfile',
         getUserIdByEmail: Environment.apiUrl + 'user/userId',
-        takeOverUserProfile: Environment.apiUrl + 'user/takeOverUserProfile'
+        takeOverUserProfile: Environment.apiUrl + 'user/takeOverUserProfile',
+        searchUserProfile: Environment.apiUrl + 'user/search'
     },
     comment: {
         addComment: Environment.apiUrl + 'comment',

@@ -13,6 +13,7 @@ import {
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import TakeOverProfile from './components/pages/users/TakeOverProfile';
+import SearchBar from './components/controls/SearchBar';
 
 const App = () => {
   const [mode, setMode] = useState('light');
