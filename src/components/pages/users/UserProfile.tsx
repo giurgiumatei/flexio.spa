@@ -88,7 +88,7 @@ const UserProfile = () => {
     }
 
     fetchUserProfile();
-  }, []);
+  }, [params.id]);
 
   return (
     <Box flex={4}>
