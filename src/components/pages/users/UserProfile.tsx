@@ -125,8 +125,8 @@ const UserProfile = () => {
         <CardMedia
           component='img'
           height='20%'
-          image={userProfile?.photo}
-          alt={userProfile?.photo}
+          image={userProfile?.photo ?? 'https://flexio.blob.core.windows.net/basic/Basic Profile Picture.png'}
+          alt={userProfile?.photo ?? 'photo'}
         />
         <CardContent>
           <Stack direction={'row'} spacing={15} justifyContent={'center'}>

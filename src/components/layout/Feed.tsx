@@ -10,7 +10,7 @@ const Feed = () => {
     UserFeedProfileProps[]
   >([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const pageSize = 5;
+  const pageSize = 3;
 
   const fetchUserFeedProfiles = async () => {
     const newUserFeedProfiles = await userService
